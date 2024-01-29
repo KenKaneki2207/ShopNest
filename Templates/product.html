@@ -1,0 +1,206 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{product.brand}} {{product.model}}</title>
+
+    <!-- Bootstrap Classes -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+    <!-- Custom Style css -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+    <nav class="navbar bg-dark sticky-top">
+        <button class="btn custom-toggler" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <a class="navbar-brand" href="index.html" style="color: white;">ShopNest</a>
+
+        <div class="offcanvas offcanvas-start bg-dark text-light" data-bs-scroll="true" tabindex="-1"
+            id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+            <div class="offcanvas-header">
+                <button type="button" class="btn-close custom-toggler" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+                <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel" style="font-size: 32px;">Navigation Menu
+                </h5>
+
+            </div>
+            <div class="offcanvas-body" style="font-size: 20px;">
+                <p class="text-center my-3 border rounded border-warning hover-effect"><a class="footer-link"
+                    href="{% url 'index' %}">Home</a></p>
+                <p class="text-center my-3 border rounded border-warning hover-effect"><a class="footer-link"
+                    href="{% url 'login' %}">Login</a></p>
+                <p class="text-center my-3 border rounded border-warning hover-effect"><a class="footer-link"
+                    href="{% url 'register' %}">Register</a></p>
+                <p class="text-center my-3 border rounded border-warning hover-effect"><a class="footer-link"
+                    href="{% url 'profile' %}">Profile</a></p>
+                <p class="text-center my-3 border rounded border-warning hover-effect"><a class="footer-link"
+                    href="{% url 'support' %}">Help</a></p>
+            </div>
+        </div>
+    </nav>
+
+
+    <form method="POST" action="{% url 'cart_order' product_id=product.id %}">
+        {% csrf_token %}
+        <h1 class="text-center mt-3" style="font-family: 'Times New Roman', Times, serif; font-weight: 600;">
+            {{product.brand}} {{product.model}}
+        </h1>
+        <div class="d-flex  justify-content-center flex-wrap mt-5">
+            <div class="card border-warning" style="width: 25rem;">
+                <img src={{product.image.url}} class="d-block w-100 h-100" alt="...">
+            </div>
+
+            <div class="ms-md-5 text-center">
+                <div>
+                    <h3 class="text-start">Price :</h3>
+                    <p id="total_price" style="font-size: 50px;">{{product.price}}</p>
+                </div>
+                <hr>
+                <div class="mb-3">
+                    <h3 class="text-start">Qty</h3>
+                    <p class="rounded-4 me-2 btn btn-warning" name="minus" onclick="minus()"><i class="bi-dash"
+                            style="font-size: 20px;"></i></p>
+
+                    <input class="text-center rounded border-2" type="number" name="product_quantity"
+                        id="product_quantity" value="1" style="width: 70px;">
+
+                    <p class="rounded-4 ms-2 btn btn-warning" name="plus" onclick="plus()">
+                        <i class="bi-plus pt-0" style="font-size: 20px;"></i>
+                    </p>
+                </div>
+
+                <button class="btn btn-warning px-4" type="submit" name="cart">
+                    Add to Cart
+                    <i class="bi-cart3"></i>
+                </button> <br>
+
+                <button class="btn btn-success px-5 mt-2" type="submit" name="buy">
+                    BUY
+                </button>
+    </form>
+
+
+
+    </div>
+
+    </div>
+    </form>
+
+    <div class="d-flex justify-content-center mt-5 text-dark">
+        <div class="text-start">
+            <h3>Product Specifications</h3>
+            <p>
+                Model : {{product.model}} <br>
+                Ram : {{product.ram}} GB <br>
+                ROM : {{product.rom}}GB <br>
+                Camera : {{product.camera}}MP
+            </p>
+        </div>
+    </div>
+    </div>
+
+    {% if reviews %}
+
+    <div class="text-center mt-5 text-dark">
+        <h3 class="m-3">Reviews</h3>
+
+
+        <div class="d-flex justify-content-center flex-wrap">
+            {% for review in reviews %}
+
+            <div class="card m-4" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title text-start">{{review.name}}</h5>
+
+                    {{review.ratings}}
+                    {% with full_stars=review.ratings|stringformat:"d" %}
+                    {% for _ in "x"|rjust:full_stars %}
+                    <i class="bi-star-fill text-warning"></i>
+                    {% endfor %}
+                    {% endwith %}
+
+                    <p class="card-text">{{review.review}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+    </div>
+    {% endif %}
+
+    <footer class="mt-5">
+        <div class="card text-center bg-dark text-light rounded-0">
+            <div class="card-header">
+                <ul class="nav nav-pills card-header-pills">
+                    <li class="nav-item">
+                        <p class="my-2"><a class="nav-link footer-link" href="index.html">Home</a></p>
+                      </li>
+                      <li class="nav-item">
+                        <p class="my-2"><a class="nav-link footer-link" href="profile.html">Profile</a></p>
+                      </li>
+                      <li class="nav-item">
+                        <p class="my-2"><a class="nav-link footer-link" href="cart.html">Cart</a></p>
+                      </li>
+                      <li class="nav-item">
+                        <p class="my-2"><a class="nav-link footer-link" href="support.html">Help</a></p>
+                      </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Conatact Us</h5>
+                <p class="card-text">
+                <p class="my-2"><i class="bi-envelope"> ecommerce@gmail.com</i></p>
+                <a class="text-light me-2 footer-link" href=""><i class="bi-instagram"></i></a>
+                <a class="text-light me-2 footer-link" href=""><i class="bi-facebook"></i></a>
+                <a class="text-light me-2 footer-link" href=""><i class="bi-twitter"></i></a>
+                </p>
+            </div>
+        </div>
+
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        </script>
+
+    <script>
+        var price = {{ product.price }};
+
+        function plus() {
+            var input = document.getElementById('product_quantity');
+            input.value = parseInt(input.value, 10) + 1;
+            total(input.value);
+        }
+
+        function minus() {
+            var input = document.getElementById('product_quantity');
+            var value = parseInt(input.value, 10);
+            if (value >= 1) {
+                value = value - 1;
+                input.value = value;
+            }
+            total(value);
+        }
+
+        function total(quantity) {
+            total_amount = quantity * price;
+            document.getElementById("total_price").innerHTML = total_amount;
+        }
+    </script>
+</body>
+
+</html>

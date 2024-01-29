@@ -1,0 +1,113 @@
+.search-button{
+    border: none; 
+    color: white;
+    background-color: transparent;
+}
+
+.navbar-toggler, .custom-toggler{
+    background-color: white;
+}
+
+/* Search input responsive */
+@media screen and (min-width:1000px){
+    .search-input{
+        width: 550px ;
+    }
+}
+
+/* sale */
+.sale{
+    background-color: #ffc107;
+    font-size: 4vw;
+    border-radius: 10px;
+    font-family: 'Times New Roman', Times, serif; 
+    background-image: url('https://img.freepik.com/premium-vector/fireworks-sparks-yellow-color-black-background_25030-724.jpg'); 
+    text-shadow: 0.3vw 0 3px black;
+}
+
+/* Ctegory wise product */
+.product-category{
+    font-size: 2.9vw;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+/* ADD to cart button */
+.add-to-cart{
+    border-radius: 10px;
+    font-size: 12px;
+    background-color: #ffc107;
+}
+
+/* footer color */
+.footer-link{
+    text-decoration: none;
+    color: inherit;
+}
+
+.footer-link:hover{
+    color: black;
+}
+
+/* Side NavBar hover Effects */
+.hover-effect:hover{
+    background-color: #ffc107;
+    color: black;
+}
+
+/* Login Page form inputs */
+.form-custom{
+    border: none;
+}
+
+.form-custom:focus{
+    box-shadow: 0 0 0 0.25rem #ffc107;
+    border: #ffc107;
+}
+
+.form-custom:checked{
+    background-color: #ffc107;
+}
+
+/* Cart Diagram Progress bar */
+.cart-icons{
+    width: 5rem; 
+    height:5rem; 
+    font-size:xxx-large;
+}
+
+/* Support Accordion */
+.custom-accorodion :focus{
+    box-shadow: 0 0 0 0.25rem #ffc107;
+}
+
+.accordion-button:not(.collapsed) {
+    color: white;
+    background-color: rgb(33,37,41);
+    box-shadow: 0 0 0 0;
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0 0;
+}
+
+.accordion-body{
+    background-color: rgb(33,37,41);
+}
+
+.accordion-item:focus-within{
+    box-shadow: 0 0 0 0.25rem #ffc107;
+}
+
+/* Profile label */
+.profile{
+    border: 1px solid black;
+}
+
+.profile:focus{
+    box-shadow: 0 0 0 0.25rem black;
+    border: black;
+}
+
+.profile:checked{
+    background-color: black;
+}

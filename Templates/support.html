@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support</title>
+
+  <!-- Bootstrap Classes -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+  <!-- Custom Style css -->
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+  <nav class="navbar bg-dark sticky-top">
+    <button class="btn custom-toggler" type="button" data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <a class="navbar-brand" href="index.html" style="color: white;">ShopNest</a>
+
+    <div class="offcanvas offcanvas-start bg-dark text-light" data-bs-scroll="true" tabindex="-1"
+      id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close custom-toggler" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel" style="font-size: 32px;">Navigation Menu
+        </h5>
+
+      </div>
+      <div class="offcanvas-body" style="font-size: 20px;">
+        <p class="text-center my-3 border rounded border-warning hover-effect"><a class="footer-link"
+          href="{% url 'index' %}">Home</a></p>
+      <p class="text-center my-3 border rounded border-warning hover-effect"><a class="footer-link"
+          href="{% url 'login' %}">Login</a></p>
+      <p class="text-center my-3 border rounded border-warning hover-effect"><a class="footer-link"
+          href="{% url 'register' %}">Register</a></p>
+      <p class="text-center my-3 border rounded border-warning hover-effect"><a class="footer-link"
+          href="{% url 'profile' %}">Profile</a></p>
+      <p class="text-center my-3 border rounded border-warning hover-effect"><a class="footer-link"
+          href="{% url 'support' %}">Help</a></p>
+      </div>
+    </div>
+  </nav>
+
+  <form method="POST" action="{% url 'support' %}">
+    {% csrf_token %}
+  <div class="m-auto mt-5 text-light border" style="max-width: 400px;">
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+      <div class="accordion-item mt-1">
+        <h2 class="accordion-header">
+          <button class="accordion-button custom-accorodion collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+            <h5>Forgot Password</h5>
+          </button>
+        </h2>
+
+        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body text-center">
+            <div class="form-floating my-3" >
+              <input type="email" class="form-control form-custom" id="floatingInput" placeholder="name@example.com" style="max-height: 120px;">
+              <label for="floatingInput">Email address</label>
+            </div>
+            <button class="btn btn-warning text-center mb-4" type="submit" name="password">Submit</button>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="accordion-item mt-1">
+        <h2 class="accordion-header">
+          <button class="accordion-button custom-accorodion collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+            <h5>Order related</h5>
+          </button>
+        </h2>
+        
+        <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body text-center">
+            <div class="form-floating my-3" >
+              <input type="number" class="form-control form-custom" id="floatingInput" placeholder="name@example.com" name="order_id" style="max-height: 120px;">
+              <label for="floatingInput">Order ID</label>
+            </div>
+            <button class="btn btn-warning text-center mb-4" type="submit" name="orders">Submit</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item mt-1">
+        <h2 class="accordion-header">
+          <button class="accordion-button custom-accorodion collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+            <h5>Other Queries</h5>
+          </button>
+        </h2>
+        <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body text-center">
+            <div class="form-floating my-3" >
+              <input type="text" class="form-control form-custom" id="floatingInput" placeholder="name@example.com" name="query" style="max-height: 120px;">
+              <label for="floatingInput">Enter your Query</label>
+            </div>
+            <button class="btn btn-warning text-center mb-4" type="submit" name="other">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+  <footer class="mt-5">
+    <div class="card text-center bg-dark text-light rounded-0">
+      <div class="card-header">
+        <ul class="nav nav-pills card-header-pills">
+          <li class="nav-item">
+            <p class="my-2"><a class="nav-link footer-link" href="index.html">Home</a></p>
+          </li>
+          <li class="nav-item">
+            <p class="my-2"><a class="nav-link footer-link" href="profile.html">Profile</a></p>
+          </li>
+          <li class="nav-item">
+            <p class="my-2"><a class="nav-link footer-link" href="cart.html">Cart</a></p>
+          </li>
+          <li class="nav-item">
+            <p class="my-2"><a class="nav-link footer-link" href="support.html">Help</a></p>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Conatact Us</h5>
+        <p class="card-text">
+        <p class="my-2"><i class="bi-envelope"> ecommerce@gmail.com</i></p>
+        <a class="text-light me-2 footer-link" href=""><i class="bi-instagram"></i></a>
+        <a class="text-light me-2 footer-link" href=""><i class="bi-facebook"></i></a>
+        <a class="text-light me-2 footer-link" href=""><i class="bi-twitter"></i></a>
+        </p>
+      </div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
